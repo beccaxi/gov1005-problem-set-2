@@ -7,7 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 
-# I had to install httr first in order to install the others
+# I had to install httr first (install.packages("httr")) in order to overcome
+# the returned warning messages and install the other packages
 
 library(dplyr)
 library(fivethirtyeight)
@@ -18,7 +19,7 @@ library(tidyverse)
 
 ```{r Mad Lib 1, include=FALSE}
 
-# slice(1) grabs the first entry of the selected and ordered column
+# slice(1) conveniently grabs the first entry of the selected and ordered column
 
 r1 <- endorsements_2020 %>% 
   arrange(date) %>%
@@ -31,7 +32,8 @@ r1 <- endorsements_2020 %>%
 
 ```{r Mad Lib 2, include=FALSE}
 
-# We use desc() so that the first entry of the column is the most recent date, rather than the earliest
+# We use desc() so that the first entry of the column is the most recent date,
+# rather than the earliest
 
 r2 <- endorsements_2020 %>% 
   arrange(desc(date)) %>%
@@ -44,7 +46,8 @@ r2 <- endorsements_2020 %>%
 
 ```{r Mad Lib 3, include=FALSE}
 
-# filter() is useful for imposing the conditions we're looking for on the dataset.
+# filter() is useful for imposing the conditions we want on the dataset in
+# question
 
 r3 <- endorsements_2020 %>%
   filter(endorsee == "Pete Buttigieg", position == "mayor") %>%
@@ -56,7 +59,7 @@ r3 <- endorsements_2020 %>%
 
 ```{r Mad Lib 4, include=FALSE}
 
-# Use summarize 
+# Use summarize to average all values in the filtered and selected column
  
 r4 <- endorsements_2020 %>% 
   filter(state == "NH") %>% 
@@ -69,48 +72,67 @@ r4 <- endorsements_2020 %>%
 
 ```{r Mad Lib 5, include=FALSE}
 
+# filter() allows you to select for multiple values. As before, use summarize()
+# to find the sum of all values in the filtered and selected column.
 
-
+r5 <- endorsements_2020 %>%
+  filter(endorsee == "Amy Klobuchar" | endorsee == "Elizabeth Warren") %>% 
+  select(points) %>% 
+  summarize(sum(points))
 ```
 
-5. Between them, the two female candidates who remain in the race (Amy Klobuchar and Elizabeth Warren) have a total of X endorsement points.
+5. Between them, the two female candidates who remain in the race (Amy Klobuchar and Elizabeth Warren) have a total of `r r5` endorsement points.
 
+
+6. The type of data you are working with (words, numbers, categories, or fancier data types like dates) determines what kinds of operations you can perform on it. To distinguish different types of data, it’s useful to use the function class(). This function allows you to get to know what kind of data you’re working with.
 
 ```{r Mad Lib 6a, include=FALSE}
 
+# Since the class() function prints the vector of the names of classes an object
+# inherits from - in this case, only one - you can simply assign the function
+# result to a new variable. Syntax was found at
+# https://davidkane9.github.io/PPBDS/4-wrangling.html.
 
-
+aclass <- class(endorsements_2020$position)
 ```
 
-6. The type of data you are working with (words, numbers, categories, or fancier data types like dates) determines what kinds of operations you can perform on it. To distinguish different types of data, it’s useful to use the function class(). This function allows you to get to know what kind of data you’re working with.
-  6a. The variable “position” is a X class of variable.
+    a. The variable “position” is a `r aclass` class of variable.
 
 
 ```{r Mad Lib 6b, include=FALSE}
 
+# As before, simply assign the result of class() to a new variable
 
-
+bclass <- class(endorsements_2020$endorser)
 ```
 
-  6b. The variable “endorser” is a X class of variable.
+    b. The variable “endorser” is a `r bclass` class of variable.
 
 
 ```{r Mad Lib 6c, include=FALSE}
 
+# As before, assign the result of class() to a new variable. We expect a
+# different class type due to the nature of "points".
 
-
+cclass <- class(endorsements_2020$points)
 ```
 
-  6c. The variable “points” is a X class of 
+    c. The variable “points” is a `r cclass` class of variable.
 
 
-## Including Plots
+## Put It Into Practice
 
-```{r pressure, echo=FALSE}
+```{r fivethirtyeight graph, include=FALSE}
+
+
 
 ```
 
 
 ### Colleagues:
-Grace Pan
-John Morse
+
+* Grace Pan
+
+* John Morse
+
+
