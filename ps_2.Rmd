@@ -1,0 +1,38 @@
+---
+title: "Gov1005: Problem Set 2"
+author: "Rebecca Xi"
+date: "2/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+# installed two package (had to install httr first to install others successfully)
+
+library("tidyverse")
+library("fivethirtyeight")
+```
+
+## Mad Libs
+
+1. The earliest date for an endorsement in the dataset is X
+2. The most recent date for an endorsement is X
+3. X is the mayor that has endorsed Pete Buttigieg.
+4. Endorsers from New Hampshire have an average of X endorsement points. (Learn how fivethirtyeight calculates endorsement points here.)
+5. Between them, the two female candidates who remain in the race (Amy Klobuchar and Elizabeth Warren) have a total of X endorsement points.
+6. The type of data you are working with (words, numbers, categories, or fancier data types like dates) determines what kinds of operations you can perform on it. To distinguish different types of data, it’s useful to use the function class(). This function allows you to get to know what kind of data you’re working with.
+  6a. The variable “position” is a X class of variable.
+  6b. The variable “endorser” is a X class of variable.
+  6c. The variable “points” is a X class of 
+  
+Solutions are as follows:
+
+```{r cars}
+```
+
+## Including Plots
+
+```{r pressure, echo=FALSE}
+
+```
+
