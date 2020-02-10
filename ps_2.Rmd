@@ -7,28 +7,102 @@ output: html_document
 
 ```{r setup, include=FALSE}
 
-# installed two package (had to install httr first to install others successfully)
+# I had to install httr first in order to install the others
 
-library("tidyverse")
-library("fivethirtyeight")
+library(dplyr)
+library(fivethirtyeight)
+library(tidyverse)
 ```
 
 ## Mad Libs
 
-1. The earliest date for an endorsement in the dataset is X
-2. The most recent date for an endorsement is X
-3. X is the mayor that has endorsed Pete Buttigieg.
-4. Endorsers from New Hampshire have an average of X endorsement points. (Learn how fivethirtyeight calculates endorsement points here.)
+```{r Mad Lib 1, include=FALSE}
+
+# slice(1) grabs the first entry of the selected and ordered column
+
+r1 <- endorsements_2020 %>% 
+  arrange(date) %>%
+  select(date) %>%
+  slice(1)
+```
+
+1. The earliest date for an endorsement in the dataset is `r r1`.
+
+
+```{r Mad Lib 2, include=FALSE}
+
+# We use desc() so that the first entry of the column is the most recent date, rather than the earliest
+
+r2 <- endorsements_2020 %>% 
+  arrange(desc(date)) %>%
+  select(date) %>%
+  slice(1)
+```
+
+2. The most recent date for an endorsement is `r r2`.
+
+
+```{r Mad Lib 3, include=FALSE}
+
+# filter() is useful for imposing the conditions we're looking for on the dataset.
+
+r3 <- endorsements_2020 %>%
+  filter(endorsee == "Pete Buttigieg", position == "mayor") %>%
+  select(endorser)
+```
+
+3. `r r3` is the mayor that has endorsed Pete Buttigieg.
+
+
+```{r Mad Lib 4, include=FALSE}
+
+# Use summarize 
+ 
+r4 <- endorsements_2020 %>% 
+  filter(state == "NH") %>% 
+  select(points) %>%
+  summarize(mean_points = mean(points))
+```
+
+4. Endorsers from New Hampshire have an average of `r r4` endorsement points.
+
+
+```{r Mad Lib 5, include=FALSE}
+
+
+
+```
+
 5. Between them, the two female candidates who remain in the race (Amy Klobuchar and Elizabeth Warren) have a total of X endorsement points.
+
+
+```{r Mad Lib 6a, include=FALSE}
+
+
+
+```
+
 6. The type of data you are working with (words, numbers, categories, or fancier data types like dates) determines what kinds of operations you can perform on it. To distinguish different types of data, it’s useful to use the function class(). This function allows you to get to know what kind of data you’re working with.
   6a. The variable “position” is a X class of variable.
-  6b. The variable “endorser” is a X class of variable.
-  6c. The variable “points” is a X class of 
-  
-Solutions are as follows:
 
-```{r cars}
+
+```{r Mad Lib 6b, include=FALSE}
+
+
+
 ```
+
+  6b. The variable “endorser” is a X class of variable.
+
+
+```{r Mad Lib 6c, include=FALSE}
+
+
+
+```
+
+  6c. The variable “points” is a X class of 
+
 
 ## Including Plots
 
@@ -36,3 +110,7 @@ Solutions are as follows:
 
 ```
 
+
+### Colleagues:
+Grace Pan
+John Morse
