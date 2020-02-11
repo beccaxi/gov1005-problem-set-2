@@ -81,10 +81,15 @@ r5 <- endorsements_2020 %>%
   summarize(sum(points))
 ```
 
-5. Between them, the two female candidates who remain in the race (Amy Klobuchar and Elizabeth Warren) have a total of `r r5` endorsement points.
+5. Between them, the two female candidates who remain in the race 
+(Amy Klobuchar and Elizabeth Warren) have a total of `r r5` endorsement points.
 
 
-6. The type of data you are working with (words, numbers, categories, or fancier data types like dates) determines what kinds of operations you can perform on it. To distinguish different types of data, it’s useful to use the function class(). This function allows you to get to know what kind of data you’re working with.
+6. The type of data you are working with (words, numbers, categories, or 
+fancier data types like dates) determines what kinds of operations you can 
+perform on it. To distinguish different types of data, it’s useful to use 
+the function class(). This function allows you to get to know what kind of 
+data you’re working with.
 
 ```{r Mad Lib 6a, include=FALSE}
 
@@ -125,8 +130,10 @@ cclass <- class(endorsements_2020$points)
 ```{r setup 2, include=FALSE}
 
 # Remember to load gov.1005.data package, which was previously installed
+# Remember to install and load ggthemes to use in graphing later
 
 library(gov.1005.data)
+library(ggthemes)
 ```
 
 ```{r fivethirtyeight data, include=FALSE}
@@ -139,14 +146,41 @@ age_data <- congress %>%
   summarize(avg_age = mean(age))
 ```
 
-```{r fivethirtyeight graph, include=FALSE}
+```{r fivethirtyeight graph}
 
-# 
+# An online introduction to the ggthemes package was helpful in discovering the
+# fivethirtyeight theme. I ended up manually labeling the x-axis ticks, though
+# I'm sure there are more efficient ways to do this.
 
 ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
   geom_line() +
-  scale_color_manual(values = c("D" = "blue", "R" = "red"))
-
+  scale_color_manual(values = c("D" = "blue", "R" = "red")) +
+  labs(
+    title = "Average Age of Members of Congress",
+    subtitle = "At start of term, 1947-2013",
+    caption = "Source: fivethirtyeight package"
+  ) +
+  scale_x_continuous(
+    limits = c(1950, 2010),
+    breaks = seq(1950, 2010, by = 10),
+    labels = c(
+      "1950" = "1950",
+      "1960" = "'60", 
+      "1970" = "'70",
+      "1980" = "'80",
+      "1990" = "'90",
+      "2000" = "2000",
+      "2010" = "'10")
+  ) +
+  scale_y_continuous(
+    limits = c(40, 60), 
+    breaks = seq(40, 60, by = 5),
+    labels = c(seq(40, 55, by = 5), "60 yrs")
+  ) + 
+  annotate("text", x = 1960, y = 57, label = "Republicans", color = "red") +
+  annotate("text", x = 1995, y = 57, label = "Democrats", color = "blue") +
+  theme_fivethirtyeight() +
+  theme(legend.position = "none") 
 ```
 
 
@@ -158,4 +192,4 @@ ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
 
 * Rachel Auslander
 
-
+* Will Scherpferman
