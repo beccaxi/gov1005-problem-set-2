@@ -138,7 +138,10 @@ library(ggthemes)
 
 ```{r fivethirtyeight data, include=FALSE}
 
-# We only care about the Democrat and Republican values
+# We only care about the Democrat and Republican values, so we filter for those.
+# We also only care about plotting year vs. average age, for each of the two
+# parties, so we use group_by() and summarize() to get those variables in
+# preparation for plotting.
 
 age_data <- congress %>% 
   filter(party %in% c("D", "R")) %>% 
@@ -148,20 +151,27 @@ age_data <- congress %>%
 
 ```{r fivethirtyeight graph, echo=FALSE}
 
-# An online introduction to the ggthemes package was helpful in discovering the
-# fivethirtyeight theme. I ended up manually labeling the x-axis ticks, though
-# I'm sure there are more efficient ways to do this.
-
 ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
   geom_line() +
+  
+# I used scale_color_manual() to manually assign the colors for the two party
+# lines and used labs() to create a title, subtitle, and caption.
+
   scale_color_manual(values = c("D" = "blue", "R" = "red")) +
   labs(
     title = "Average Age of Members of Congress",
     subtitle = "At start of term, 1947-2013",
     caption = "Source: fivethirtyeight package"
   ) +
+  
+# In scale_x_continuous() and scale_y_continuous(), I defined the limits of the
+# axes, axis breaks for each, and then any necessary axis tick labels. I ended
+# up manually labeling the x-axis ticks, though I'm sure there are more
+# efficient ways to do this. The only necessary y-axis tick label was "60 years"
+# on the highest tick.
+  
   scale_x_continuous(
-    limits = c(1950, 2010),
+    limits = c(1945, 2015),
     breaks = seq(1950, 2010, by = 10),
     labels = c(
       "1950" = "1950",
@@ -177,8 +187,16 @@ ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
     breaks = seq(40, 60, by = 5),
     labels = c(seq(40, 55, by = 5), "60 yrs")
   ) + 
+  
+# Adding annotations to the two lines on the graph was straightforward, keeping
+# in mind the colors already manually assigned to the two parties
+  
   annotate("text", x = 1960, y = 57, label = "Republicans", color = "red") +
   annotate("text", x = 1995, y = 57, label = "Democrats", color = "blue") +
+  
+# An online introduction to the ggthemes package was helpful in discovering the
+# fivethirtyeight theme
+  
   theme_fivethirtyeight() +
   theme(legend.position = "none") 
 ```
@@ -193,3 +211,5 @@ ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
 * Rachel Auslander
 
 * Will Scherpferman
+
+
