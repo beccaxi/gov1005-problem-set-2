@@ -146,7 +146,7 @@ age_data <- congress %>%
   summarize(avg_age = mean(age))
 ```
 
-```{r fivethirtyeight graph}
+```{r fivethirtyeight graph, echo=FALSE}
 
 # An online introduction to the ggthemes package was helpful in discovering the
 # fivethirtyeight theme. I ended up manually labeling the x-axis ticks, though
