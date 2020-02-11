@@ -5,7 +5,7 @@ date: "2/12/2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup 1, include=FALSE}
 
 # I had to install httr first (install.packages("httr")) in order to overcome
 # the returned warning messages and install the other packages
@@ -122,9 +122,30 @@ cclass <- class(endorsements_2020$points)
 
 ## Put It Into Practice
 
+```{r setup 2, include=FALSE}
+
+# Remember to load gov.1005.data package, which was previously installed
+
+library(gov.1005.data)
+```
+
+```{r fivethirtyeight data, include=FALSE}
+
+# We only care about the Democrat and Republican values
+
+age_data <- congress %>% 
+  filter(party %in% c("D", "R")) %>% 
+  group_by(year, party) %>% 
+  summarize(avg_age = mean(age))
+```
+
 ```{r fivethirtyeight graph, include=FALSE}
 
+# 
 
+ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
+  geom_line() +
+  scale_color_manual(values = c("D" = "blue", "R" = "red"))
 
 ```
 
@@ -134,5 +155,7 @@ cclass <- class(endorsements_2020$points)
 * Grace Pan
 
 * John Morse
+
+* Rachel Auslander
 
 
