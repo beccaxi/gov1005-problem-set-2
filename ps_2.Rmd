@@ -214,8 +214,3 @@ ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
 
 * Will Scherpferman
 
-* Evelyn Cai
-
-
-
-
