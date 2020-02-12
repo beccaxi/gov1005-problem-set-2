@@ -130,7 +130,7 @@ cclass <- class(endorsements_2020$points)
 ```{r setup 2, include=FALSE}
 
 # Remember to load gov.1005.data package, which was previously installed
-# Remember to install and load ggthemes to use in graphing later
+# Remember to install and load ggthemes to use in my ggplot code chunk
 
 library(gov.1005.data)
 library(ggthemes)
@@ -195,7 +195,8 @@ ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
   annotate("text", x = 1995, y = 57, label = "Democrats", color = "blue") +
   
 # An online introduction to the ggthemes package was helpful in discovering the
-# fivethirtyeight theme
+# fivethirtyeight theme. I also wanted to get rid of the legend on the right
+# hand side, hence the use of legend.position = "none".
   
   theme_fivethirtyeight() +
   theme(legend.position = "none") 
