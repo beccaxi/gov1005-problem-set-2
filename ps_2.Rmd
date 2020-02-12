@@ -106,7 +106,8 @@ aclass <- class(endorsements_2020$position)
 
 ```{r Mad Lib 6b, include=FALSE}
 
-# As before, simply assign the result of class() to a new variable
+# As before, simply assign the result of class() to a new variable, in this case
+# bclass
 
 bclass <- class(endorsements_2020$endorser)
 ```
@@ -212,5 +213,9 @@ ggplot(age_data, aes(x = year, y = avg_age, color = party)) +
 * Rachel Auslander
 
 * Will Scherpferman
+
+* Evelyn Cai
+
+
 
 
